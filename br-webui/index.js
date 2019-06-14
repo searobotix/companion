@@ -686,6 +686,13 @@ networking.on('connection', function(socket) {
 	// Network setup
 	socket.on('get wifi aps', function() {
 		logger.log("get wifi aps");
+		try{
+			cmd = child_process.execSync("sudo cat /etc/wpa_supplicant/wpa_supplicant.conf");
+		}
+		catch(e)
+		{
+			return;
+		}
 		try {
 			var cmd = child_process.execSync('sudo wpa_cli scan');
 			logger.log("sudo wpa_cli scan : ", cmd.toString());

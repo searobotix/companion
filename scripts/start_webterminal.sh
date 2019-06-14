@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $HOME/
-tty.js --port 8088
+/home/pi/companion/node_modules/ttyx/bin/ttyx-server.js --port 8088
