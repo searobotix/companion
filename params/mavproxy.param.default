@@ -1,7 +1,7 @@
 --master=/dev/autopilot,115200
---load-module='GPSInput,DepthOutput'
+--load-module='GPSInput,DepthOutput,restserver'
 --source-system=200
---cmd="set heartbeat 0"
+--cmd="set heartbeat 0;restserver start"
 --out udpin:localhost:9000
 --out udpout:localhost:9002
 --out udpin:0.0.0.0:14660
