@@ -1,0 +1,56 @@
+<html>
+<head>
+<head>
+    <meta charset="utf-8">
+    <!-- Flight Indicators library styles -->
+    <link rel="stylesheet" type="text/css" href="flightindicators.min.css" />
+    <title>jQuery Flight Indicators Plugin</title>
+    <style>
+
+    </style>
+</head>
+</head>
+<body>
+<span id="attitude"></span>
+<span id="heading"></span>
+<span id="variometer"></span>
+<span id="airspeed"></span>
+<span id="altimeter"></span>
+
+</body>
+<!-- Importing jQuery library -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+<!-- Importing the FlightIndicators library -->
+<script src="jquery.flightindicators.min.js"></script>
+
+<script>
+var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:-20, size:200, showBox : false});
+var heading = $.flightIndicator('#heading', 'heading', {heading:150, showBox:false});
+var variometer = $.flightIndicator('#variometer', 'variometer', {vario:-5, showBox:false});
+var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false});
+var altimeter = $.flightIndicator('#altimeter', 'altimeter');
+
+// Update at 20Hz
+var increment = 0;
+setInterval(function() {
+    // Attitude update
+    attitude.setRoll(30*Math.sin(increment/10));
+    attitude.setPitch(50*Math.sin(increment/20));
+    
+    // Heading update
+    heading.setHeading(increment);
+    
+    // Vario update
+    variometer.setVario(2*Math.sin(increment/10));
+    
+    // Airspeed update
+    airspeed.setAirSpeed(80+80*Math.sin(increment/10));
+    
+    // Altimeter update
+    altimeter.setAltitude(10*increment);
+    altimeter.setPressure(1000+3*Math.sin(increment/50));
+    increment++;
+}, 50);
+</script>
+</html>

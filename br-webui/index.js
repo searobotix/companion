@@ -23,6 +23,10 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap-select/dist/j
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap-select/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap-slider/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap-slider/dist/css'));
+app.use('/jquery.flightindicators.min.js', express.static(__dirname + '/jquery.flightindicators.min.js'));
+app.use('/flightindicators.min.css', express.static(__dirname + '/flightindicators.min.css'));
+app.use('/img', express.static(__dirname + '/img'));
+
 
 var fs = require("fs");
 var expressLiquid = require('express-liquid');
@@ -166,9 +170,14 @@ app.get('/camera', function(req, res) {
 	res.render('camera', {});
 });
 
+app.get('/instruments', function(req, res) {
+	res.render('instruments', {});
+});
+
 app.get('/mavproxy', function(req, res) {
 	res.render('mavproxy', {});
 });
+
 
 app.get('/network', function(req, res) {
 	res.render('network', {});
