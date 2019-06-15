@@ -6,6 +6,8 @@ const SocketIOFile = require('socket.io-file');
 var logger = require('tracer').console();
 var os = require("os");
 var home_dir = process.env.HOME
+var httpProxy = require('http-proxy');
+var apiProxy = httpProxy.createProxyServer();
 logger.log('ENVIRONMENT', process.env)
 logger.log('COMPANION_DIR', process.env.COMPANION_DIR)
 logger.log('HOME_DIR', process.env.HOME)
@@ -26,6 +28,12 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap-slider/dist/
 app.use('/jquery.flightindicators.min.js', express.static(__dirname + '/jquery.flightindicators.min.js'));
 app.use('/flightindicators.min.css', express.static(__dirname + '/flightindicators.min.css'));
 app.use('/img', express.static(__dirname + '/img'));
+
+// reverse proxy for mavlink
+app.all("/mavlink/*", function(req, res) {
+    console.log('redirecting to Server2');
+    apiProxy.web(req, res, {target: "http://localhost:5001"});
+});
 
 
 var fs = require("fs");
