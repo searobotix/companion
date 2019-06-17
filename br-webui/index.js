@@ -30,8 +30,8 @@ app.use('/flightindicators.min.css', express.static(__dirname + '/flightindicato
 app.use('/img', express.static(__dirname + '/img'));
 
 // reverse proxy for mavlink
-app.all("/mavlink/*", function(req, res) {
-    console.log('redirecting to Server2');
+app.all("/rest/*", function(req, res) {
+    //console.log('redirecting to Server2');
     apiProxy.web(req, res, {target: "http://localhost:5001"});
 });
 
