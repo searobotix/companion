@@ -16,4 +16,6 @@ else
         echo "Invalid number of parameters [$#]: $@"
 fi
 
-sudo -H -u pi screen -dm -S video /home/pi/companion/tools/streamer.py
+sudo -H -u root screen -dm -S video /home/pi/companion/tools/streamer.py
+
+
