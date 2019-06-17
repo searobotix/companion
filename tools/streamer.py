@@ -3,7 +3,7 @@
 import os
 from time import sleep
 import sys
-home = os.environ['HOME']
+home = "/home/pi" #os.environ['HOME']
 
 os.system("sudo modprobe bcm2835-v4l2")
 

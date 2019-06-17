@@ -2,10 +2,10 @@
 export LD_LIBRARY_PATH=/usr/local/lib/
 
 if [ -z "$1" ]; then
-    WIDTH=$(cat ~/vidformat.param | xargs | cut -f1 -d" ")
-    HEIGHT=$(cat ~/vidformat.param | xargs | cut -f2 -d" ")
-    FRAMERATE=$(cat ~/vidformat.param | xargs | cut -f3 -d" ")
-    DEVICE=$(cat ~/vidformat.param | xargs | cut -f4 -d" ")
+    WIDTH=$(cat /home/pi/vidformat.param | xargs | cut -f1 -d" ")
+    HEIGHT=$(cat /home/pi/vidformat.param | xargs | cut -f2 -d" ")
+    FRAMERATE=$(cat /home/pi/vidformat.param | xargs | cut -f3 -d" ")
+    DEVICE=$(cat /home/pi/vidformat.param | xargs | cut -f4 -d" ")
 else
     WIDTH=$1
     HEIGHT=$2
@@ -39,7 +39,7 @@ if [ $? != 0 ]; then
 fi
 
 # load gstreamer options
-gstOptions=$(tr '\n' ' ' < $HOME/gstreamer2.param)
+gstOptions=$(tr '\n' ' ' < /home/pi/gstreamer2.param)
 
 # make sure framesize and framerate are supported
 
@@ -56,6 +56,6 @@ else
     echo "starting device $DEVICE with width $WIDTH height $HEIGHT framerate $FRAMERATE options $gstOptions"
     bash -c "export LD_LIBRARY_PATH=/usr/local/lib/ && gst-launch-1.0 -v v4l2src device=$DEVICE do-timestamp=true ! video/x-h264, width=$WIDTH, height=$HEIGHT, framerate=$FRAMERATE/1 $gstOptions"
     # if we make it this far, it means the gst pipeline failed, so load the backup settings
-    cp ~/vidformat.param.bak ~/vidformat.param && rm ~/vidformat.param.bak
+    cp /home/pi/vidformat.param.bak /home/pi/vidformat.param && rm /home/pi/vidformat.param.bak
 fi
 
