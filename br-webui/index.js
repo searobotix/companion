@@ -687,7 +687,7 @@ networking.on('connection', function(socket) {
 			// Restart the network in the callback
 			cmd = child_process.exec("sudo sh -c \"echo '" + networkString + "' > /etc/wpa_supplicant/wpa_supplicant.conf\"", function (error, stdout, stderr) {
 				logger.log("sudo sh -c \"echo '" + networkString + "' > /etc/wpa_supplicant/wpa_supplicant.conf\" : ", error + stdout + stderr);
-				var cmd = child_process.exec('sudo ifdown wlan0 && sudo ifup wlan0', function (error, stdout, stderr) {
+				var cmd = child_process.exec('sudo ifconfig wlan0 down && sudo ifconfig wlan0 up', function (error, stdout, stderr) {
 					logger.log("restarting network");
 					logger.log(error + stdout + stderr);
 					socket.emit('join complete');
@@ -722,7 +722,7 @@ networking.on('connection', function(socket) {
 			logger.log(cmd.toString());
 			
 			logger.log("Bringing down wlan0....");
-			cmd = child_process.execSync("sudo ifdown wlan0");
+			cmd = child_process.execSync("sudo ifconfig wlan0 down");
 			logger.log(cmd.toString());
 			
 			logger.log("Writing over config....");
@@ -730,7 +730,7 @@ networking.on('connection', function(socket) {
 			logger.log(cmd.toString());
 			
 			logger.log("Bringing wlan0 up....");
-			cmd = child_process.execSync("sudo ifup wlan0");
+			cmd = child_process.execSync("sudo ifconfig wlan0 up");
 			logger.log(cmd.toString());
 			
 			return;
