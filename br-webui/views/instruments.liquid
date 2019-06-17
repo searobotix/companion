@@ -34,13 +34,15 @@ var altimeter = $.flightIndicator('#altimeter', 'altimeter');
 // Update at 20Hz
 var increment = 0;
 setInterval(function() {
-    // Attitude update
-    attitude.setRoll(30*Math.sin(increment/10));
-    attitude.setPitch(50*Math.sin(increment/20));
-    
-    // Heading update
-    heading.setHeading(increment);
-    
+$.getJSON("/rest/mavlink/ATTITUDE").success(function(data){
+    //console.log(data.roll); // will contain all data (and display it in console)
+    attitude.setRoll(data.roll * 180 / Math.PI);
+    attitude.setPitch(data.pitch * 180 / Math.PI);
+
+    heading.setHeading(data.yaw * 180 / Math.PI);
+
+
+})
     // Vario update
     variometer.setVario(2*Math.sin(increment/10));
     
@@ -51,6 +53,6 @@ setInterval(function() {
     altimeter.setAltitude(10*increment);
     altimeter.setPressure(1000+3*Math.sin(increment/50));
     increment++;
-}, 50);
+}, 100);
 </script>
 </html>
