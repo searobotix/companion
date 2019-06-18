@@ -1,5 +1,10 @@
 export COMPANION_DIR=/home/pi/companion
 
+# fix screen for x86/arm weirdness
+if screen -ls | grep -q '777'; then
+   chmod 777 /run/screen
+fi
+
 # copy default parameters if neccessary
 for default_param_file in $COMPANION_DIR/params/*.param.default; do
     param_file=/home/pi/$(basename -- $(echo $default_param_file | sed "s/.default//"))
