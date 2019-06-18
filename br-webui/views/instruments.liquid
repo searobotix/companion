@@ -11,8 +11,8 @@
 </head>
 </head>
 <body>
-<span id="attitude"></span>
-<span id="heading"></span>
+<span style="position: absolute; bottom:0; left:0;" id="attitude"></span>
+<span style="position: absolute; bottom:0; right:0;" id="heading"></span>
 <span id="variometer"></span>
 <span id="airspeed"></span>
 <span id="altimeter"></span>
@@ -25,11 +25,8 @@
 <script src="jquery.flightindicators.min.js"></script>
 
 <script>
-var attitude = $.flightIndicator('#attitude', 'attitude', {roll:50, pitch:-20, size:200, showBox : false});
+var attitude = $.flightIndicator('#attitude', 'attitude', {roll:0, pitch:0, size:200, showBox : false});
 var heading = $.flightIndicator('#heading', 'heading', {heading:150, showBox:false});
-var variometer = $.flightIndicator('#variometer', 'variometer', {vario:-5, showBox:false});
-var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false});
-var altimeter = $.flightIndicator('#altimeter', 'altimeter');
 
 // Update at 20Hz
 var increment = 0;
@@ -38,21 +35,8 @@ $.getJSON("/rest/mavlink/ATTITUDE").success(function(data){
     //console.log(data.roll); // will contain all data (and display it in console)
     attitude.setRoll(data.roll * 180 / Math.PI);
     attitude.setPitch(data.pitch * 180 / Math.PI);
-
     heading.setHeading(data.yaw * 180 / Math.PI);
-
-
 })
-    // Vario update
-    variometer.setVario(2*Math.sin(increment/10));
-    
-    // Airspeed update
-    airspeed.setAirSpeed(80+80*Math.sin(increment/10));
-    
-    // Altimeter update
-    altimeter.setAltitude(10*increment);
-    altimeter.setPressure(1000+3*Math.sin(increment/50));
-    increment++;
 }, 100);
 </script>
 </html>
