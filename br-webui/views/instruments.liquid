@@ -152,7 +152,7 @@ function processRequest(data) {
       //console.log(fields);
     })
   
-    attitude.setRoll(data.ATTITUDE.roll * 180 / Math.PI);
+    attitude.setRoll(0 - (data.ATTITUDE.roll * 180 / Math.PI));
     attitude.setPitch(data.ATTITUDE.pitch * 180 / Math.PI);
     heading.setHeading(data.ATTITUDE.yaw * 180 / Math.PI);
 }
