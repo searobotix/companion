@@ -5,6 +5,12 @@ if screen -ls | grep -q '777'; then
    chmod 777 /run/screen
 fi
 
+FILE=$COMPANION_DIR/tools/100MB.file
+if [ ! -f "$FILE" ]; then
+    echo "creating 100mb test file.."
+    dd if=/dev/zero of=$FILE bs=1048576 count=100
+fi
+
 # copy default parameters if neccessary
 for default_param_file in $COMPANION_DIR/params/*.param.default; do
     param_file=/home/pi/$(basename -- $(echo $default_param_file | sed "s/.default//"))
