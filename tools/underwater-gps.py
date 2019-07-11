@@ -243,5 +243,7 @@ while True:
             pass # no data available for udp read
         else:
             print(e)
+    except KeyError as e:
+        print("failed to receive orientation")
 
     time.sleep(0.02)
