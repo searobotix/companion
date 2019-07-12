@@ -33,6 +33,10 @@ ul li{
   border-top:1px solid rgba(255,255,255,.1);  
   transition:all .5s;
   opacity:0;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-weight: 1000;
 }
 ul li:hover{
   background:#ccc;
@@ -60,6 +64,10 @@ label{
   color:white;  
   cursor:pointer;
   opacity:0; 
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-weight: 1000;
 }
 label:hover{  
   opacity:1; 
@@ -85,6 +93,13 @@ span {
 
 span:hover {
   cursor: hand;
+}
+
+span {
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  font-weight: 1000;
 }
 
 </style>
