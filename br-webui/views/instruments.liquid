@@ -163,8 +163,10 @@ function processRequest(data) {
 
     $('.dataview').each(function() {
       var fields = $(this).attr('id').split('-');
-      $(this).text(fields[1] + ": " + data[fields[0]][fields[1]].toFixed(1));
-      //console.log(fields);
+      $(this).text(fields[1] + ": " + data[fields[0]][fields[1]]);
+      try{
+          $(this).text(fields[1] + ": " + data[fields[0]][fields[1]].toFixed(1));
+      } catch (e) {}
     })
   
     attitude.setRoll(0 - (data.ATTITUDE.roll * 180 / Math.PI));
