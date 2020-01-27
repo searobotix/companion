@@ -1,0 +1,30 @@
+swagger: "2.0"
+info:
+  description: "This is the API for the ArduSub Companion."
+  version: "1.0.0"
+  title: "Swagger Companion"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "companion.swagger.io"
+basePath: "/v2"
+tags:
+- name: "system"
+  description: "System status and diagnostics"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+- name: "pixhawk"
+  description: "Firmware flashing functionalities"
+- name: "network"
+  description: "Networking management"
+- name: "camera"
+  description: "Camera management"
+- name: "mavproxy"
+  description: "mavproxy management"
+schemes:
+- "https"
+- "http"
