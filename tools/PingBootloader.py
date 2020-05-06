@@ -1,4 +1,4 @@
-#!/usr/bin/python -u
+#!/usr/bin/env python3
 
 # This is a python script that will flash new firmware to
 # a Blue Robotics Ping1D acoustic rangefinder.
