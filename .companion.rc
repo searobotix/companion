@@ -20,11 +20,11 @@ for default_param_file in $COMPANION_DIR/params/*.param.default; do
 done
 
 if [ ! -f /home/pi/.updating ]; then
-	sudo python $COMPANION_DIR/tools/ping_enumerator.py || true
+	sudo $COMPANION_DIR/tools/ping_enumerator.py || true
 	if [ -d /dev/serial/ping ]; then
 		screen -dm -S pingproxy pingproxy.py --device $(ls -d /dev/serial/ping/* | head -1)
 		# Uncomment the next line to enable Ping1D as a range finder
-		screen -dm -S pingmav python $COMPANION_DIR/tools/ping1d_mavlink_driver.py
+		screen -dm -S pingmav $COMPANION_DIR/tools/ping1d_mavlink_driver.py
 	fi
 	screen -dm -S mavproxy $COMPANION_DIR/tools/telem.py
 	screen -dm -S video $COMPANION_DIR/tools/streamer.py
