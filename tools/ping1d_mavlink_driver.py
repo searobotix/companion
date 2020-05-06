@@ -1,4 +1,4 @@
-#!/usr/bin/python -u
+#!/usr/bin/env python3
 
 """ Request distance measurements from a Blue Robotics Ping1D device over udp (PingProxy)
     Send results to autopilot via mavproxy over udp for use as mavlink rangefinder
