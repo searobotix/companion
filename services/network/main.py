@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
+import binascii
 import bottle
+import hashlib
 import json
 import os
 from wpa_supplicant import WPASupplicant
@@ -91,6 +93,22 @@ class WifiManager:
 
         return WifiManager.__dict_from_table(data)
 
+    @staticmethod
+    def hash_password(ssid, password):
+        """ This provides the same result as wpa_passphrase
+
+        Arguments:
+            ssid {[str]} -- ssid network name
+            password {[str]} -- network password
+
+        Returns:
+           str -- hashed passphrase
+        """
+
+        # thank you: https://stackoverflow.com/a/62758303
+        hash = hashlib.pbkdf2_hmac('sha1', str.encode(password), str.encode(ssid), 4096, 32)
+        return binascii.hexlify(hash).decode('utf-8')
+
     def set_wifi_password(self, ssid, password):
         """ Set network ssid and password
 
@@ -98,6 +116,10 @@ class WifiManager:
             ssid {[str]} -- ssid network name
             password {[str]} -- network password
         """
+
+        # hash password so that we are not saving plain text passwords
+        password = WifiManager.hash_password(ssid, password)
+
         data, result = self.wpa.send_command_add_network()
         data = data.strip()
 
@@ -108,7 +130,7 @@ class WifiManager:
         self.wpa.send_command_set_network(
             network_number, 'ssid', '\"{}\"'.format(ssid))
         self.wpa.send_command_set_network(
-            network_number, 'psk', '\"{}\"'.format(password))
+            network_number, 'psk', password)
         self.wpa.send_command_enable_network(network_number)
         answer, result = self.wpa.send_command_save_config()
         answer = answer.strip()
