@@ -117,6 +117,10 @@ class WifiManager:
             password {[str]} -- network password
         """
 
+        # remove any existing networks, so that we have only one network
+        # at any one time
+        self.wpa.send_command_remove_network('all')
+
         # hash password so that we are not saving plain text passwords
         password = WifiManager.hash_password(ssid, password)
 
