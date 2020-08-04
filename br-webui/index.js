@@ -781,6 +781,10 @@ function updateCPUStats () {
 			io.emit('cpu stats', cpu_stats);
 		})
 	})
+
+	getSoCTemperature(function(data) {
+		io.emit('soc temperature', data);
+	})
 }
 
 function getCpuStatus(callback) {
@@ -796,6 +800,14 @@ function getDiskStatus(callback) {
 		var data = stdout.split("\n")[1].match(/\S+/g);
 		callback(data);
 	});
+}
+
+function getSoCTemperature(callback) {
+	child_process.exec("vcgencmd measure_temp", function (error, stdout, stderr) {
+		logger.log("Got SoC Temperature: ", error, stdout, stderr);
+		var data = stdout.split("=")[1];
+		callback(data);
+	})
 }
 
 // Make updateCPUStats() run once every 5 seconds (=os.loadavg() update rate)
