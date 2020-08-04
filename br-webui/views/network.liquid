@@ -36,18 +36,32 @@ class Wifi {
 			}
 
 			var statusIndicator = document.getElementById("wifi-status")
-			statusIndicator.innerHTML = data['wpa_state']
 
+			console.log("wifi status wpa_state:", data['wpa_state'])
+
+			// reference enum wpa_states
+			// https://w1.fi/wpa_supplicant/devel/defs_8h.html#a4aeb27c1e4abd046df3064ea9756f0bc
 			switch (data['wpa_state']) {
+				case 'DISCONNECTED':
+				case 'INTERFACE_DISABLED':
 				case 'INACTIVE':
 					statusIndicator.innerHTML = '<h4 style="color:red;">Disconnected</h1>'
 					break;
 				case 'SCANNING':
-				case 'ASSOCIATED':
 					statusIndicator.innerHTML = '<h4 style="color:goldenrod;">Scanning</h1>'
+					break;
+				case 'AUTHENTICATING':
+				case 'ASSOCIATING':
+				case 'ASSOCIATED':
+				case '4WAY_HANDSHAKE':
+				case 'GROUP_HANDSHAKE':
+					statusIndicator.innerHTML = '<h4 style="color:goldenrod;">Connecting</h1>'
 					break;
 				case 'COMPLETED':
 					statusIndicator.innerHTML = `<h4 style="color:green;">Connected: ${data['ssid']} (${data['ip_address']})</h1>`
+					break;
+				default:
+					statusIndicator.innerHTML = data['wpa_state']
 					break;
 			}
 		})
