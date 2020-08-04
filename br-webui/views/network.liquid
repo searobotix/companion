@@ -48,7 +48,6 @@ class Wifi {
 					break;
 				case 'COMPLETED':
 					statusIndicator.innerHTML = `<h4 style="color:green;">Connected: ${data['ssid']} (${data['ip_address']})</h1>`
-					disableButton(false)
 					break;
 			}
 		})
@@ -101,6 +100,7 @@ class Wifi {
 
 		$.post('/service/network/wifi/connect', JSON.stringify(data), function(data, status) {
 			console.log("Wifi connect answer:", data, status)
+			disableButton(false)
 		}, 'json');
 	}
 }
