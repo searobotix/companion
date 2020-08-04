@@ -21,6 +21,12 @@ socket.on('cpu stats', function(data) {
 	console.log('got cpu status', data);
 });
 
+// listen to SoC temperature info
+socket.on('soc temperature', function(data) {
+	console.log('got SoC temperature', data);
+	document.getElementById('socTemperature').innerHTML = data;
+});
+
 socket.on('terminal output', function(data) {
 	var terminalEl = document.getElementById("terminal-output");
 	var html = terminalEl.innerHTML + data;
@@ -446,6 +452,8 @@ socket.on('cpu stats', function(data) {
 						<dd id="ramFree"></dd>
 					<dt>Disk Usage: </dt>
 						<dd id="diskStatus"></dd>
+					<dt>SoC Temperature: </dt>
+						<dd id="socTemperature"></dd>
 					<dt>CPU Status: </dt>
 						<dd id="cpuStatus"></dd>
 				</dl>
