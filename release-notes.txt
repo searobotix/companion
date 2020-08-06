@@ -137,3 +137,14 @@ Initial release
 - Set mavproxy.params streamrate if not set
 - Fix Integration of Waterlinked Underwater GPS and ArduSub 4.0
 - Upgrade mavlink2rest to version 0.7.2
+
+0.0.22:
+- Add http-proxy for mavlink2rest API
+    - mavlink2rest can not be accessible under [http://192.168.2.2:2770/](http://192.168.2.2:2770/api/mavlink)
+- Add SoC temperature to /system page
+- Add Wi-fi service
+    - Fix list of available networks
+- Update udev rules from usb to tty
+- Update mavlink2rest to [0.7.3](https://github.com/patrickelectric/mavlink2rest/releases/tag/0.7.3)
+- Update bridges to [0.5.0](https://github.com/patrickelectric/bridges/releases/tag/0.5.0)
+- Drop ssh-agent/ssh support in /git page
