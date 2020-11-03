@@ -1,3 +1,6 @@
-# companion
+# companion 
 
-This repository is the Blue Robotics version of the [ArduPilot/companion](https://github.com/ArduPilot/companion) repository. This is the code that runs on the Raspberry Pi in the BlueROV2. Currently, this repository only provides an implementation for the Raspberry Pi Computer.
+companion是运行在ROV机载电脑（Raspberry Pi）上的代码
+
+User: pi
+passward:companion
